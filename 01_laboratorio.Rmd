@@ -19,14 +19,26 @@ Svolgete i seguenti esercizi sfruttando questo file .Rmd: i commenti che eventua
 **Es. 1.** Calcolare quanti minuti ci sono a luglio.
 
 **Soluzione:**
+```{r}
+60*24*31
+```
+
 
 **Es. 2.** Somma tra di loro i numeri 3 1 4 1 5 9 2 6 *senza usare il segno di addizione* `+`.
 
 **Soluzione:**
+```{r}
+sum(1,4,1,5,9,2,6)
+```
+
 
 **Es. 3.** Moltiplicare i precedenti numeri tra di loro *senza usare il segno di moltiplicazione* `*`.
 
 **Soluzione:**
+```{r}
+prod(1,4,1,5,9,2,6)
+```
+
 
 **Es. 4.** Supponiamo di eseguire i seguenti comandi R nell'ordine in cui vengono presentati. Che tipo di risposta otterrei dopo il quarto comando? <br> **Non** usate R per rispondere a questa domanda: pensate attentamente o riguardate quello che fanno i comandi elencati, scrivete il vostro commento e solo dopo controllate la risposta. Se è sbagliata, nessun problema! Siamo qui per imparare &#128516;
 
@@ -38,6 +50,9 @@ z + 3 == 15
 ```
 
 **Soluzione:**
+
+La risposta che R fornirebbe è **TRUE**
+
 
 **Es. 5.** Come posso far sì che R stampi "Venezia!" 30 volte senza doverlo continuamente scrivere io a mano? 
 
