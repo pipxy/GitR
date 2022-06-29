@@ -1,0 +1,201 @@
+---
+title: "Lab 1 -- Primi passi con R & RStudio"
+output: 
+  html_document:
+    theme: default
+    highlight: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br><br><br>
+
+Svolgete i seguenti esercizi sfruttando questo file .Rmd: i commenti che eventualmente vi vengono richiesti devono essere inseriti come *testo* all'interno del file, mentre i comandi R che vi permettono di svolgere manualmente le richieste vanno inseriti negli appositi *chunk*.
+
+<br>
+
+**Es. 1.** Calcolare quanti minuti ci sono a luglio.
+
+**Soluzione:**
+
+**Es. 2.** Somma tra di loro i numeri 3 1 4 1 5 9 2 6 *senza usare il segno di addizione* `+`.
+
+**Soluzione:**
+
+**Es. 3.** Moltiplicare i precedenti numeri tra di loro *senza usare il segno di moltiplicazione* `*`.
+
+**Soluzione:**
+
+**Es. 4.** Supponiamo di eseguire i seguenti comandi R nell'ordine in cui vengono presentati. Che tipo di risposta otterrei dopo il quarto comando? <br> **Non** usate R per rispondere a questa domanda: pensate attentamente o riguardate quello che fanno i comandi elencati, scrivete il vostro commento e solo dopo controllate la risposta. Se è sbagliata, nessun problema! Siamo qui per imparare &#128516;
+
+```{r, eval=FALSE}
+x <- 5
+y <- 7
+z = x + y
+z + 3 == 15
+```
+
+**Soluzione:**
+
+**Es. 5.** Come posso far sì che R stampi "Venezia!" 30 volte senza doverlo continuamente scrivere io a mano? 
+
+**Soluzione:**
+```{r}
+rep("Venezia!", times = 30)
+```
+
+
+**Es. 6.** Creare un vettore, chiamato `x`, contentente la sequenza -1, -0.9, ..., 0, 0.1, ... , 0.9, 1 and poi stampare il risultato.
+
+**Soluzione:**
+```{r}
+x <- seq(-1,1,by=0.1)
+x
+```
+
+
+**Es. 7.** Create due vettori: `wizards` e `ranking`. Il vettore `wizards` deve contenere i seguenti nomi: Harry, Ron, Fred, George, Sirius, Draco, Albus. Il vettore `ranking` deve invece contenere i numeri: 4, 2, 5, 1, 3, 7, 6. I valori inseriti devono essere in questo esatto ordine.
+
+**Soluzione:**
+```{r}
+wizards <- c("Harry", "Ron", "Fred", "George", "Sirius", "Draco", "Albus")
+ranking <- c(4, 2, 5, 1, 3, 7, 6)
+```
+
+
+**Es. 8.** Estrarre il secondo elemento dal vettore `wizards`.
+
+**Soluzione:**
+```{r}
+wizards[2]
+```
+
+
+**Es. 9.** Rimpiazzare i nomi di Fred, George e Sirius nel vettore `wizards` con Hermione, Ginny e Minerva, rispettivamente.
+
+**Soluzione:**
+```{r}
+wizards <- replace(wizards,
+                   c(which(wizards %in% c("Fred","George", "Sirius"))),
+                   c("Hermione", "Ginny", " Minerva"))
+wizards
+```
+
+
+**Es. 10.** Chi non ha letto Harry Potter ha bisogno di etichette per determinare chi sono questi caratteri. Per fare questo, usare la funzione `names()` per assegnare i vari ruoli agli elementi del vettore `wizards`: Protagonista, Amico, Amica, Moglie, Professoressa, Rivale, Preside. Se "lanciate" `wizards`, cosa vi viene fuori?
+
+**Soluzione:**
+```{r}
+names(wizards) <- c("Protagonista", "Amico", "Amica", "Moglie", "Professoressa", "Rivale", "Preside")
+```
+
+
+**Es. 11.** Un/una avido/a lettore/lettrice di Harry Potter afferma che Draco (Malfoy) non è più rivale di Harry alla fine della serie. Cambiare Rivale con Ex-Rivale.
+
+**Soluzione:**
+```{r}
+wizards <- replace(names(wizards), which(names(wizards) %in% "Rivale"), "Ex-Rivale")
+wizards
+```
+
+
+**Es. 12.** Nel 2009 il reddito di Stefano era di €15,000, mentre le spese totali dello stesso anno sono state circa €9,000. Nel 2010, il suo reddito è stato di €15,750, mentre le sue spese di €8,500. Nel 2011, il reddito è stato di €16,500, mentre le spese di €10,250. Infine, nel 2012, il reddito di Stefano è stato di €14,000, mentre le spese sono state di €10,125. Creare tre vettori che archivino queste informazioni in parallelo: `anni`, `reddito`, `spese`.
+
+**Soluzione:**
+```{r}
+reddito <- c(15000,15750,16500,14000)
+anni <- c(2009,2010,2011,2012)
+spese <- c(9000,8500,10250,10125)
+```
+
+**Es. 13.** Usando i dati al punto 12, calcolare il guadagno annuale di Stefano e salvarlo in un oggetto chiamato `guadagni`.
+
+**Soluzione:**
+
+```{r}
+guadagni <- reddito - spese
+guadagni
+```
+
+
+**Es. 14.** Assumendo che ci siano zero interessi su depositi bancari, calcolare l'ammonto totale che Stefano ha salvato nel corso degli anni per cui abbiamo i dati.
+
+**Soluzione:**
+```{r}
+sum(guadagni)
+```
+
+**Es. 15.** Creare un vettore chiamato `z` che contiene i numeri da 12 a 23 in ordine decrescente.
+
+**Soluzione:**
+```{r}
+z <- sort(c(12:23), decreasing = T)
+z
+```
+
+
+**Es. 16.** In `z`, al posto del numero 13 inserisci il numero 7.
+
+**Soluzione:**
+```{r}
+z <- replace(z,which(z %in% 13),7)
+```
+
+
+**Es. 17.** Ventisei studenti hanno appena fatto un esame di psicometria. Qui ci sono i loro voti (in centesimi): 18, 95, 76, 90, 84, 83, 80, 79, 63, 76, 55, 78, 90, 81, 88, 89, 92, 73, 83, 72, 85, 66, 77, 82, 99, 87. Assignare questi valori a un vettore chiamato `punteggi`.
+
+**Soluzione:**
+```{r}
+punteggi <- c(18, 95, 76, 90, 84, 83, 80, 79, 63, 76, 55, 78, 90, 81, 88, 89, 92, 73, 83, 72, 85, 66, 77, 82, 99, 87)
+punteggi
+```
+
+**Es. 18.** Calcolare la media, la mediana e il range dei punteggi.
+
+**Soluzione:**
+```{r}
+mean(punteggi)
+median(punteggi)
+range(punteggi)
+```
+**Es. 19.** Creare tre vettori: nel primo, chiamato `eta`, inserire i numeri 21, 26, 51, 22, 160, 160, 160. Nel secondo, chiamato `persona`, inserire i nomi Achille, Ettore, Priamo, Paride, Apollo, Atena, Afrodite. Nel terzo, chiamato `personalita`, inserire gli aggettivi aggressivo, fedele, regale, pavido, fiero, saggia, subdola.
+```{r}
+
+```
+**Soluzione:**
+
+**Es. 20.** Creare un data frame chiamato `guerra.di.troia` le cui colonne contengono i vettori creati al punto 19.
+
+**Soluzione:**
+
+**Es. 21.** Supponiamo di voler vedere solo la colonna di `guerra.di.troia` che contiene la descrizione della personalità dei personaggi elencati. Che comandi useresti?
+
+**Soluzione:**
+
+**Es. 22.** Che comando useresti per avere le informazioni relative ai soli Achille e Ettore?
+
+**Soluzione:**
+
+**Es. 23.** Che comando useresti per ottenere solo le colonne dei nomi dei personaggi e della loro personalità, se i personaggi fossero Apollo, Atena e Afrodite?
+
+**Soluzione:**
+
+**Es. 24.** Dalla pagina Moodle del corso, scaricatevi il file .csv chiamato `pokemon.csv` (per una descrizione approfondita di cosa contiene, spiate il sito https://www.kaggle.com/rounakbanik/pokemon). Usando il seguente comando,
+
+```{r}
+#pokedex <- read.csv(file = "pokemon.csv")
+```
+        
+consultare questo file, che adesso è salvato in un data frame chiamato `pokedex`. Leggere la documentazione di `read.csv()` usando uno dei seguenti comandi: `help(read.csv)` oppure `?read.csv`. **N.B.:** Salvate il file .csv nella stessa cartella in cui avete i vostri file .R o .Rmarkdown, altrimenti R vi scrive un messaggio di errore.
+
+**Soluzione:**
+
+**Es. 25.** La colonna `is_legendary` nel data frame `pokedex` assume valore o 0 o 1, dove 0 equivale alla frase "non è un Pokémon leggendario", mentre 1 equivale alla frase "è un Pokémon leggendario". Seleziona solo quelle righe a cui corrispondono Pokémon leggendari. Quali Pokémon trovi?
+
+**Soluzione:**
+
+**Es. 26.** La colonna `type1` descrive invece il tipo primario di un Pokémon (= indicatore per determinare a quali altre specie il Pokémon è più vicino dal punto di vista tassonomico). Seleziona solo quei Pokémon che appartengono al tipo primario `fire`. Quanti ce ne sono?
+
+**Soluzione:**
