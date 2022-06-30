@@ -236,8 +236,10 @@ pokedex <- read.csv(file = "pokemon.csv")
 **Es. 25.** La colonna `is_legendary` nel data frame `pokedex` assume valore o 0 o 1, dove 0 equivale alla frase "non è un Pokémon leggendario", mentre 1 equivale alla frase "è un Pokémon leggendario". Seleziona solo quelle righe a cui corrispondono Pokémon leggendari. Quali Pokémon trovi?
 
 **Soluzione:**
+Interpretazione: selezionare solo le righe a cui corrispondono i pokemon leggendari e stampare i nomi dei pokemon leggendari
 ```{r}
-pokedex[c(which(pokedex$is_legendary %in% 1)),]
+legg.pokedex <- pokedex[c(which(pokedex$is_legendary %in% 1)),]
+legg.pokedex$name
 ```
 
 
