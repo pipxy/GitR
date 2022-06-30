@@ -227,6 +227,10 @@ guerra.di.troia[c(which(persona %in% c("Apollo", "Atena", "Afrodite"))),c(1,3)]
 consultare questo file, che adesso è salvato in un data frame chiamato `pokedex`. Leggere la documentazione di `read.csv()` usando uno dei seguenti comandi: `help(read.csv)` oppure `?read.csv`. **N.B.:** Salvate il file .csv nella stessa cartella in cui avete i vostri file .R o .Rmarkdown, altrimenti R vi scrive un messaggio di errore.
 
 **Soluzione:**
+```{r}
+pokedex <- read.csv(file = "pokemon.csv")
+```
+
 
 **Es. 25.** La colonna `is_legendary` nel data frame `pokedex` assume valore o 0 o 1, dove 0 equivale alla frase "non è un Pokémon leggendario", mentre 1 equivale alla frase "è un Pokémon leggendario". Seleziona solo quelle righe a cui corrispondono Pokémon leggendari. Quali Pokémon trovi?
 
