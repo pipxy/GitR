@@ -176,26 +176,52 @@ median(punteggi)
 range(punteggi)
 ```
 **Es. 19.** Creare tre vettori: nel primo, chiamato `eta`, inserire i numeri 21, 26, 51, 22, 160, 160, 160. Nel secondo, chiamato `persona`, inserire i nomi Achille, Ettore, Priamo, Paride, Apollo, Atena, Afrodite. Nel terzo, chiamato `personalita`, inserire gli aggettivi aggressivo, fedele, regale, pavido, fiero, saggia, subdola.
-```{r}
 
-```
 **Soluzione:**
+```{r}
+eta <- c(21, 26, 51, 22, 160, 160, 160)
+persona <- c("Achille", "Ettore", "Priamo", "Paride", "Apollo", "Atena", "Afrodite")
+personalita <-c("aggressivo", "fedele", "regale", "pavido", "fiero", "saggia", "subdola")
+```
 
 **Es. 20.** Creare un data frame chiamato `guerra.di.troia` le cui colonne contengono i vettori creati al punto 19.
 
 **Soluzione:**
+```{r}
+guerra.di.troia <- data.frame(persona, eta, personalita)
+guerra.di.troia
+```
 
 **Es. 21.** Supponiamo di voler vedere solo la colonna di `guerra.di.troia` che contiene la descrizione della personalità dei personaggi elencati. Che comandi useresti?
 
 **Soluzione:**
+```{r}
+guerra.di.troia$personalita
+guerra.di.troia[,3]
+```
 
 **Es. 22.** Che comando useresti per avere le informazioni relative ai soli Achille e Ettore?
 
 **Soluzione:**
 
+```{r}
+guerra.di.troia[1:2,]
+```
+
 **Es. 23.** Che comando useresti per ottenere solo le colonne dei nomi dei personaggi e della loro personalità, se i personaggi fossero Apollo, Atena e Afrodite?
 
 **Soluzione:**
+
+Interpretazione: Se i personaggi sono ...., fornire Nome e Personalità.
+```{r}
+nome <- persona[x]
+while (nome == "Apollo" || nome == "Atena" || nome == "Afrodite")
+{guerra.di.troia[c(x),c(1,3)]}
+
+for(x in c(1:7))
+  
+```
+
 
 **Es. 24.** Dalla pagina Moodle del corso, scaricatevi il file .csv chiamato `pokemon.csv` (per una descrizione approfondita di cosa contiene, spiate il sito https://www.kaggle.com/rounakbanik/pokemon). Usando il seguente comando,
 
