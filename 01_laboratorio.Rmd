@@ -51,7 +51,8 @@ z + 3 == 15
 
 **Soluzione:**
 
-La risposta che R fornirebbe è **TRUE**
+**Non otterrò nessuna risposta** dato che il chunck è impostato per "evaluate=FALSE", cioè R calcola la condizione z+3==15
+ma non stampa il risultato.
 
 
 **Es. 5.** Come posso far sì che R stampi "Venezia!" 30 volte senza doverlo continuamente scrivere io a mano? 
@@ -229,12 +230,17 @@ consultare questo file, che adesso è salvato in un data frame chiamato `pokedex
 **Soluzione:**
 ```{r}
 pokedex <- read.csv(file = "pokemon.csv")
+pokedex
 ```
 
 
 **Es. 25.** La colonna `is_legendary` nel data frame `pokedex` assume valore o 0 o 1, dove 0 equivale alla frase "non è un Pokémon leggendario", mentre 1 equivale alla frase "è un Pokémon leggendario". Seleziona solo quelle righe a cui corrispondono Pokémon leggendari. Quali Pokémon trovi?
 
 **Soluzione:**
+```{r}
+
+```
+
 
 **Es. 26.** La colonna `type1` descrive invece il tipo primario di un Pokémon (= indicatore per determinare a quali altre specie il Pokémon è più vicino dal punto di vista tassonomico). Seleziona solo quei Pokémon che appartengono al tipo primario `fire`. Quanti ce ne sono?
 
