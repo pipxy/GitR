@@ -230,7 +230,6 @@ consultare questo file, che adesso è salvato in un data frame chiamato `pokedex
 **Soluzione:**
 ```{r}
 pokedex <- read.csv(file = "pokemon.csv")
-pokedex
 ```
 
 
@@ -238,10 +237,16 @@ pokedex
 
 **Soluzione:**
 ```{r}
-
+pokedex[c(which(pokedex$is_legendary %in% 1)),]
 ```
 
 
 **Es. 26.** La colonna `type1` descrive invece il tipo primario di un Pokémon (= indicatore per determinare a quali altre specie il Pokémon è più vicino dal punto di vista tassonomico). Seleziona solo quei Pokémon che appartengono al tipo primario `fire`. Quanti ce ne sono?
 
 **Soluzione:**
+Interpretazione: selezionare tutte le colonne per ogni Pokemon che appartiene al tipo primario "fire" e contarne il numero
+```{r}
+tipo1.fuoco <- pokedex[c(which(pokedex$type1 %in% "fire")),]
+length(tipo1.fuoco)
+```
+
