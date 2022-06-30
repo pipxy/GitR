@@ -399,7 +399,9 @@ y &lt;- 7
 z = x + y
 z + 3 == 15</code></pre>
 <p><strong>Soluzione:</strong></p>
-<p>La risposta che R fornirebbe è <strong>TRUE</strong></p>
+<p><strong>Non otterrò nessuna risposta</strong> dato che il chunck è
+impostato per “evaluate=FALSE”, cioè R calcola la condizione z+3==15 ma
+non stampa il risultato.</p>
 <p><strong>Es. 5.</strong> Come posso far sì che R stampi “Venezia!” 30
 volte senza doverlo continuamente scrivere io a mano?</p>
 <p><strong>Soluzione:</strong></p>
@@ -516,21 +518,51 @@ Priamo, Paride, Apollo, Atena, Afrodite. Nel terzo, chiamato
 <code>personalita</code>, inserire gli aggettivi aggressivo, fedele,
 regale, pavido, fiero, saggia, subdola.</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>eta &lt;- c(21, 26, 51, 22, 160, 160, 160)
+persona &lt;- c(&quot;Achille&quot;, &quot;Ettore&quot;, &quot;Priamo&quot;, &quot;Paride&quot;, &quot;Apollo&quot;, &quot;Atena&quot;, &quot;Afrodite&quot;)
+personalita &lt;-c(&quot;aggressivo&quot;, &quot;fedele&quot;, &quot;regale&quot;, &quot;pavido&quot;, &quot;fiero&quot;, &quot;saggia&quot;, &quot;subdola&quot;)</code></pre>
 <p><strong>Es. 20.</strong> Creare un data frame chiamato
 <code>guerra.di.troia</code> le cui colonne contengono i vettori creati
 al punto 19.</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>guerra.di.troia &lt;- data.frame(persona, eta, personalita)
+guerra.di.troia</code></pre>
+<pre><code>##    persona eta personalita
+## 1  Achille  21  aggressivo
+## 2   Ettore  26      fedele
+## 3   Priamo  51      regale
+## 4   Paride  22      pavido
+## 5   Apollo 160       fiero
+## 6    Atena 160      saggia
+## 7 Afrodite 160     subdola</code></pre>
 <p><strong>Es. 21.</strong> Supponiamo di voler vedere solo la colonna
 di <code>guerra.di.troia</code> che contiene la descrizione della
 personalità dei personaggi elencati. Che comandi useresti?</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>guerra.di.troia$personalita</code></pre>
+<pre><code>## [1] &quot;aggressivo&quot; &quot;fedele&quot;     &quot;regale&quot;     &quot;pavido&quot;     &quot;fiero&quot;     
+## [6] &quot;saggia&quot;     &quot;subdola&quot;</code></pre>
+<pre class="r"><code>guerra.di.troia[,3]</code></pre>
+<pre><code>## [1] &quot;aggressivo&quot; &quot;fedele&quot;     &quot;regale&quot;     &quot;pavido&quot;     &quot;fiero&quot;     
+## [6] &quot;saggia&quot;     &quot;subdola&quot;</code></pre>
 <p><strong>Es. 22.</strong> Che comando useresti per avere le
 informazioni relative ai soli Achille e Ettore?</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>guerra.di.troia[1:2,]</code></pre>
+<pre><code>##   persona eta personalita
+## 1 Achille  21  aggressivo
+## 2  Ettore  26      fedele</code></pre>
 <p><strong>Es. 23.</strong> Che comando useresti per ottenere solo le
 colonne dei nomi dei personaggi e della loro personalità, se i
 personaggi fossero Apollo, Atena e Afrodite?</p>
 <p><strong>Soluzione:</strong></p>
+<p>Interpretazione: Se i personaggi sono …., fornire Nome e
+Personalità.</p>
+<pre class="r"><code>guerra.di.troia[c(which(persona %in% c(&quot;Apollo&quot;, &quot;Atena&quot;, &quot;Afrodite&quot;))),c(1,3)]</code></pre>
+<pre><code>##    persona personalita
+## 5   Apollo       fiero
+## 6    Atena      saggia
+## 7 Afrodite     subdola</code></pre>
 <p><strong>Es. 24.</strong> Dalla pagina Moodle del corso, scaricatevi
 il file .csv chiamato <code>pokemon.csv</code> (per una descrizione
 approfondita di cosa contiene, spiate il sito <a href="https://www.kaggle.com/rounakbanik/pokemon" class="uri">https://www.kaggle.com/rounakbanik/pokemon</a>). Usando il
@@ -544,18 +576,664 @@ chiamato <code>pokedex</code>. Leggere la documentazione di
 avete i vostri file .R o .Rmarkdown, altrimenti R vi scrive un messaggio
 di errore.</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>pokedex &lt;- read.csv(file = &quot;pokemon.csv&quot;)</code></pre>
 <p><strong>Es. 25.</strong> La colonna <code>is_legendary</code> nel
 data frame <code>pokedex</code> assume valore o 0 o 1, dove 0 equivale
 alla frase “non è un Pokémon leggendario”, mentre 1 equivale alla frase
 “è un Pokémon leggendario”. Seleziona solo quelle righe a cui
 corrispondono Pokémon leggendari. Quali Pokémon trovi?</p>
 <p><strong>Soluzione:</strong></p>
+<pre class="r"><code>pokedex[c(which(pokedex$is_legendary %in% 1)),]</code></pre>
+<pre><code>##                                       abilities against_bug against_dark
+## 144                  [&#39;Pressure&#39;, &#39;Snow Cloak&#39;]        0.50          1.0
+## 145                      [&#39;Pressure&#39;, &#39;Static&#39;]        0.50          1.0
+## 146                  [&#39;Pressure&#39;, &#39;Flame Body&#39;]        0.25          1.0
+## 150                     [&#39;Pressure&#39;, &#39;Unnerve&#39;]        2.00          2.0
+## 151                             [&#39;Synchronize&#39;]        2.00          2.0
+## 243                 [&#39;Pressure&#39;, &#39;Inner Focus&#39;]        1.00          1.0
+## 244                 [&#39;Pressure&#39;, &#39;Inner Focus&#39;]        0.50          1.0
+## 245                 [&#39;Pressure&#39;, &#39;Inner Focus&#39;]        1.00          1.0
+## 249                  [&#39;Pressure&#39;, &#39;Multiscale&#39;]        1.00          2.0
+## 250                 [&#39;Pressure&#39;, &#39;Regenerator&#39;]        0.25          1.0
+## 251                            [&#39;Natural Cure&#39;]        4.00          2.0
+## 377                    [&#39;Clear Body&#39;, &#39;Sturdy&#39;]        1.00          1.0
+## 378                  [&#39;Clear Body&#39;, &#39;Ice Body&#39;]        1.00          1.0
+## 379               [&#39;Clear Body&#39;, &#39;Light Metal&#39;]        0.50          1.0
+## 380                                [&#39;Levitate&#39;]        2.00          2.0
+## 381                                [&#39;Levitate&#39;]        2.00          2.0
+## 382                                 [&#39;Drizzle&#39;]        1.00          1.0
+## 383                                 [&#39;Drought&#39;]        1.00          1.0
+## 384                                [&#39;Air Lock&#39;]        0.50          1.0
+## 385                            [&#39;Serene Grace&#39;]        1.00          2.0
+## 386                                [&#39;Pressure&#39;]        2.00          2.0
+## 480                                [&#39;Levitate&#39;]        2.00          2.0
+## 481                                [&#39;Levitate&#39;]        2.00          2.0
+## 482                                [&#39;Levitate&#39;]        2.00          2.0
+## 483                   [&#39;Pressure&#39;, &#39;Telepathy&#39;]        0.50          1.0
+## 484                   [&#39;Pressure&#39;, &#39;Telepathy&#39;]        1.00          1.0
+## 485                [&#39;Flash Fire&#39;, &#39;Flame Body&#39;]        0.25          1.0
+## 486                              [&#39;Slow Start&#39;]        1.00          1.0
+## 487       [&#39;Pressure&#39;, &#39;Telepathy&#39;, &#39;Levitate&#39;]        0.50          2.0
+## 488                                [&#39;Levitate&#39;]        2.00          2.0
+## 490                               [&#39;Hydration&#39;]        1.00          1.0
+## 491                              [&#39;Bad Dreams&#39;]        2.00          0.5
+## 492            [&#39;Natural Cure&#39;, &#39;Serene Grace&#39;]        2.00          1.0
+## 493                               [&#39;Multitype&#39;]        1.00          1.0
+## 494                            [&#39;Victory Star&#39;]        1.00          2.0
+## 638                               [&#39;Justified&#39;]        0.25          0.5
+## 639                               [&#39;Justified&#39;]        0.50          0.5
+## 640                               [&#39;Justified&#39;]        1.00          0.5
+## 641     [&#39;Prankster&#39;, &#39;Defiant&#39;, &#39;Regenerator&#39;]        0.50          1.0
+## 642     [&#39;Prankster&#39;, &#39;Defiant&#39;, &#39;Volt Absorb&#39;]        0.50          1.0
+## 643                              [&#39;Turboblaze&#39;]        0.50          1.0
+## 644                                [&#39;Teravolt&#39;]        1.00          1.0
+## 645 [&#39;Sand Force&#39;, &#39;Sheer Force&#39;, &#39;Intimidate&#39;]        0.50          1.0
+## 646      [&#39;Pressure&#39;, &#39;Teravolt&#39;, &#39;Turboblaze&#39;]        1.00          1.0
+## 647                               [&#39;Justified&#39;]        0.50          0.5
+## 648                            [&#39;Serene Grace&#39;]        2.00          2.0
+## 649                                [&#39;Download&#39;]        0.50          1.0
+## 716                              [&#39;Fairy Aura&#39;]        0.50          0.5
+## 717                               [&#39;Dark Aura&#39;]        1.00          0.5
+## 718           [&#39;Aura Break&#39;, &#39;Power Construct&#39;]        1.00          1.0
+## 719                              [&#39;Clear Body&#39;]        0.50          0.5
+## 720                                [&#39;Magician&#39;]        1.00          4.0
+## 721                            [&#39;Water Absorb&#39;]        0.50          1.0
+## 785             [&#39;Electric Surge&#39;, &#39;Telepathy&#39;]        0.50          0.5
+## 786              [&#39;Psychic Surge&#39;, &#39;Telepathy&#39;]        1.00          1.0
+## 787               [&#39;Grassy Surge&#39;, &#39;Telepathy&#39;]        1.00          0.5
+## 788                [&#39;Misty Surge&#39;, &#39;Telepathy&#39;]        0.50          0.5
+## 789                                 [&#39;Unaware&#39;]        2.00          2.0
+## 790                                  [&#39;Sturdy&#39;]        2.00          2.0
+## 791                         [&#39;Full Metal Body&#39;]        1.00          2.0
+## 792                           [&#39;Shadow Shield&#39;]        1.00          4.0
+## 793                             [&#39;Beast Boost&#39;]        0.50          1.0
+## 794                             [&#39;Beast Boost&#39;]        0.50          0.5
+## 795                             [&#39;Beast Boost&#39;]        0.50          0.5
+## 796                             [&#39;Beast Boost&#39;]        1.00          1.0
+## 797                             [&#39;Beast Boost&#39;]        0.25          1.0
+## 798                             [&#39;Beast Boost&#39;]        1.00          1.0
+## 799                             [&#39;Beast Boost&#39;]        2.00          0.5
+## 800                             [&#39;Prism Armor&#39;]        2.00          2.0
+## 801                              [&#39;Soul-Heart&#39;]        0.25          0.5
+##     against_dragon against_electric against_fairy against_fight against_fire
+## 144            1.0             2.00          1.00          1.00         2.00
+## 145            1.0             1.00          1.00          0.50         1.00
+## 146            1.0             2.00          0.50          0.50         0.50
+## 150            1.0             1.00          1.00          0.50         1.00
+## 151            1.0             1.00          1.00          0.50         1.00
+## 243            1.0             0.50          1.00          1.00         1.00
+## 244            1.0             1.00          0.50          1.00         0.50
+## 245            1.0             2.00          1.00          1.00         0.50
+## 249            1.0             2.00          1.00          0.25         1.00
+## 250            1.0             2.00          0.50          0.50         0.50
+## 251            1.0             0.50          1.00          0.50         2.00
+## 377            1.0             1.00          1.00          2.00         0.50
+## 378            1.0             1.00          1.00          2.00         2.00
+## 379            0.5             1.00          0.50          2.00         2.00
+## 380            2.0             0.50          2.00          0.50         0.50
+## 381            2.0             0.50          2.00          0.50         0.50
+## 382            1.0             2.00          1.00          1.00         0.50
+## 383            1.0             0.00          1.00          1.00         1.00
+## 384            2.0             1.00          2.00          0.50         0.50
+## 385            0.5             1.00          0.50          1.00         2.00
+## 386            1.0             1.00          1.00          0.50         1.00
+## 480            1.0             1.00          1.00          0.50         1.00
+## 481            1.0             1.00          1.00          0.50         1.00
+## 482            1.0             1.00          1.00          0.50         1.00
+## 483            1.0             0.50          1.00          2.00         1.00
+## 484            2.0             1.00          2.00          1.00         0.25
+## 485            0.5             1.00          0.25          2.00         1.00
+## 486            1.0             1.00          1.00          2.00         1.00
+## 487            2.0             0.50          2.00          0.00         0.50
+## 488            1.0             1.00          1.00          0.50         1.00
+## 490            1.0             2.00          1.00          1.00         0.50
+## 491            1.0             1.00          2.00          2.00         1.00
+## 492            1.0             0.50          1.00          1.00         2.00
+## 493            1.0             1.00          1.00          2.00         1.00
+## 494            1.0             1.00          0.50          0.50         0.50
+## 638            0.5             1.00          1.00          2.00         2.00
+## 639            1.0             1.00          2.00          2.00         0.50
+## 640            1.0             0.50          2.00          1.00         2.00
+## 641            1.0             2.00          1.00          0.50         1.00
+## 642            1.0             1.00          1.00          0.50         1.00
+## 643            2.0             0.50          1.00          1.00         0.25
+## 644            2.0             0.25          2.00          1.00         0.50
+## 645            1.0             0.00          1.00          0.50         1.00
+## 646            2.0             0.50          2.00          2.00         1.00
+## 647            1.0             2.00          2.00          1.00         0.50
+## 648            1.0             1.00          1.00          1.00         1.00
+## 649            0.5             1.00          0.50          1.00         4.00
+## 716            0.0             1.00          1.00          0.50         1.00
+## 717            1.0             2.00          2.00          1.00         1.00
+## 718            2.0             0.00          2.00          1.00         0.50
+## 719            0.0             1.00          1.00          1.00         0.50
+## 720            1.0             1.00          1.00          0.00         1.00
+## 721            1.0             2.00          0.50          1.00         0.25
+## 785            0.0             0.50          1.00          0.50         1.00
+## 786            0.0             1.00          1.00          0.25         1.00
+## 787            0.0             0.50          1.00          0.50         2.00
+## 788            0.0             2.00          1.00          0.50         0.50
+## 789            1.0             1.00          1.00          0.50         1.00
+## 790            1.0             1.00          1.00          0.50         1.00
+## 791            0.5             1.00          0.50          1.00         2.00
+## 792            1.0             1.00          1.00          0.00         1.00
+## 793            1.0             1.00          0.50          1.00         0.50
+## 794            1.0             1.00          2.00          0.50         2.00
+## 795            1.0             1.00          2.00          0.50         2.00
+## 796            1.0             0.50          1.00          1.00         1.00
+## 797            0.5             2.00          0.50          1.00         2.00
+## 798            0.5             0.50          0.50          2.00         4.00
+## 799            2.0             0.50          4.00          2.00         0.50
+## 800            1.0             1.00          1.00          0.50         1.00
+## 801            0.0             1.00          0.50          1.00         2.00
+##     against_flying against_ghost against_grass against_ground against_ice
+## 144            1.0           1.0          0.50            0.0        1.00
+## 145            0.5           1.0          0.50            0.0        2.00
+## 146            1.0           1.0          0.25            0.0        1.00
+## 150            1.0           2.0          1.00            1.0        1.00
+## 151            1.0           2.0          1.00            1.0        1.00
+## 243            0.5           1.0          1.00            2.0        1.00
+## 244            1.0           1.0          0.50            2.0        0.50
+## 245            1.0           1.0          2.00            1.0        0.50
+## 249            1.0           2.0          0.50            0.0        2.00
+## 250            1.0           1.0          0.25            0.0        1.00
+## 251            2.0           2.0          0.50            0.5        2.00
+## 377            0.5           1.0          2.00            2.0        1.00
+## 378            1.0           1.0          1.00            1.0        0.50
+## 379            0.5           1.0          0.50            2.0        0.50
+## 380            1.0           2.0          0.50            1.0        2.00
+## 381            1.0           2.0          0.50            1.0        2.00
+## 382            1.0           1.0          2.00            1.0        0.50
+## 383            1.0           1.0          2.00            1.0        2.00
+## 384            1.0           1.0          0.25            0.0        4.00
+## 385            0.5           2.0          0.50            2.0        0.50
+## 386            1.0           2.0          1.00            1.0        1.00
+## 480            1.0           2.0          1.00            1.0        1.00
+## 481            1.0           2.0          1.00            1.0        1.00
+## 482            1.0           2.0          1.00            1.0        1.00
+## 483            0.5           1.0          0.25            2.0        1.00
+## 484            1.0           1.0          1.00            1.0        1.00
+## 485            0.5           1.0          0.25            4.0        0.25
+## 486            1.0           0.0          1.00            1.0        1.00
+## 487            1.0           2.0          0.50            1.0        2.00
+## 488            1.0           2.0          1.00            1.0        1.00
+## 490            1.0           1.0          2.00            1.0        0.50
+## 491            1.0           0.5          1.00            1.0        1.00
+## 492            2.0           1.0          0.50            0.5        2.00
+## 493            1.0           0.0          1.00            1.0        1.00
+## 494            1.0           2.0          0.50            2.0        0.50
+## 638            1.0           1.0          0.50            2.0        0.50
+## 639            1.0           1.0          2.00            2.0        1.00
+## 640            4.0           1.0          0.50            0.5        2.00
+## 641            1.0           1.0          0.50            0.0        2.00
+## 642            0.5           1.0          0.50            0.0        2.00
+## 643            1.0           1.0          0.25            2.0        1.00
+## 644            0.5           1.0          0.50            2.0        2.00
+## 645            1.0           1.0          1.00            0.0        4.00
+## 646            1.0           1.0          0.50            1.0        1.00
+## 647            2.0           1.0          2.00            1.0        0.50
+## 648            1.0           0.0          1.00            1.0        1.00
+## 649            1.0           1.0          0.25            1.0        0.50
+## 716            1.0           1.0          1.00            1.0        1.00
+## 717            1.0           0.5          0.50            0.0        2.00
+## 718            1.0           1.0          1.00            1.0        4.00
+## 719            0.5           1.0          2.00            2.0        1.00
+## 720            1.0           4.0          1.00            1.0        1.00
+## 721            1.0           1.0          1.00            2.0        0.25
+## 785            0.5           1.0          1.00            2.0        1.00
+## 786            1.0           2.0          1.00            1.0        1.00
+## 787            2.0           1.0          0.50            0.5        2.00
+## 788            1.0           1.0          2.00            1.0        0.50
+## 789            1.0           2.0          1.00            1.0        1.00
+## 790            1.0           2.0          1.00            1.0        1.00
+## 791            0.5           2.0          0.50            2.0        0.50
+## 792            1.0           4.0          1.00            1.0        1.00
+## 793            0.5           1.0          1.00            4.0        1.00
+## 794            4.0           1.0          0.50            0.5        1.00
+## 795            4.0           1.0          0.50            0.5        1.00
+## 796            0.5           1.0          1.00            2.0        1.00
+## 797            0.5           1.0          0.25            0.0        1.00
+## 798            1.0           1.0          0.25            1.0        1.00
+## 799            1.0           0.5          0.50            1.0        2.00
+## 800            1.0           2.0          1.00            1.0        1.00
+## 801            0.5           1.0          0.50            2.0        0.50
+##     against_normal against_poison against_psychic against_rock against_steel
+## 144            1.0           1.00            1.00         4.00          2.00
+## 145            1.0           1.00            1.00         2.00          0.50
+## 146            1.0           1.00            1.00         4.00          0.50
+## 150            1.0           1.00            0.50         1.00          1.00
+## 151            1.0           1.00            0.50         1.00          1.00
+## 243            1.0           1.00            1.00         1.00          0.50
+## 244            1.0           1.00            1.00         2.00          0.50
+## 245            1.0           1.00            1.00         1.00          0.50
+## 249            1.0           1.00            0.50         2.00          1.00
+## 250            1.0           1.00            1.00         4.00          0.50
+## 251            1.0           2.00            0.50         1.00          1.00
+## 377            0.5           0.50            1.00         1.00          2.00
+## 378            1.0           1.00            1.00         2.00          2.00
+## 379            0.5           0.00            0.50         0.50          0.50
+## 380            1.0           1.00            0.50         1.00          1.00
+## 381            1.0           1.00            0.50         1.00          1.00
+## 382            1.0           1.00            1.00         1.00          0.50
+## 383            1.0           0.50            1.00         0.50          1.00
+## 384            1.0           1.00            1.00         2.00          1.00
+## 385            0.5           0.00            0.25         0.50          0.50
+## 386            1.0           1.00            0.50         1.00          1.00
+## 480            1.0           1.00            0.50         1.00          1.00
+## 481            1.0           1.00            0.50         1.00          1.00
+## 482            1.0           1.00            0.50         1.00          1.00
+## 483            0.5           0.00            0.50         0.50          0.50
+## 484            1.0           1.00            1.00         1.00          0.50
+## 485            0.5           0.00            0.50         1.00          0.25
+## 486            1.0           1.00            1.00         1.00          1.00
+## 487            0.0           0.50            1.00         1.00          1.00
+## 488            1.0           1.00            0.50         1.00          1.00
+## 490            1.0           1.00            1.00         1.00          0.50
+## 491            1.0           1.00            0.00         1.00          1.00
+## 492            1.0           2.00            1.00         1.00          1.00
+## 493            1.0           1.00            1.00         1.00          1.00
+## 494            1.0           1.00            0.50         2.00          0.50
+## 638            0.5           0.00            1.00         0.25          0.50
+## 639            0.5           0.50            2.00         0.50          2.00
+## 640            1.0           2.00            2.00         0.50          1.00
+## 641            1.0           1.00            1.00         2.00          1.00
+## 642            1.0           1.00            1.00         2.00          0.50
+## 643            1.0           1.00            1.00         2.00          0.50
+## 644            1.0           1.00            1.00         1.00          0.50
+## 645            1.0           0.50            1.00         1.00          1.00
+## 646            1.0           1.00            1.00         2.00          2.00
+## 647            1.0           1.00            2.00         0.50          0.50
+## 648            1.0           1.00            0.50         1.00          1.00
+## 649            0.5           0.00            0.50         1.00          0.50
+## 716            1.0           2.00            1.00         1.00          2.00
+## 717            1.0           1.00            0.00         2.00          1.00
+## 718            1.0           0.50            1.00         0.50          1.00
+## 719            0.5           1.00            1.00         1.00          4.00
+## 720            0.0           0.50            0.50         1.00          1.00
+## 721            1.0           1.00            1.00         2.00          0.25
+## 785            1.0           2.00            1.00         1.00          1.00
+## 786            1.0           2.00            0.50         1.00          2.00
+## 787            1.0           4.00            1.00         1.00          2.00
+## 788            1.0           2.00            1.00         1.00          1.00
+## 789            1.0           1.00            0.50         1.00          1.00
+## 790            1.0           1.00            0.50         1.00          1.00
+## 791            0.5           0.00            0.25         0.50          0.50
+## 792            0.0           0.50            0.50         1.00          1.00
+## 793            0.5           0.25            2.00         1.00          2.00
+## 794            1.0           1.00            2.00         1.00          1.00
+## 795            1.0           1.00            2.00         1.00          1.00
+## 796            1.0           1.00            1.00         1.00          0.50
+## 797            0.5           0.00            0.50         1.00          0.50
+## 798            0.5           0.00            0.50         0.50          0.50
+## 799            1.0           1.00            0.00         1.00          1.00
+## 800            1.0           1.00            0.50         1.00          1.00
+## 801            0.5           0.00            0.50         0.50          1.00
+##     against_water attack base_egg_steps base_happiness base_total capture_rate
+## 144          1.00     85          20480             35        580            3
+## 145          1.00     90          20480             35        580            3
+## 146          2.00    100          20480             35        580            3
+## 150          1.00    150          30720              0        780            3
+## 151          1.00    100          30720            100        600           45
+## 243          1.00     85          20480             35        580            3
+## 244          2.00    115          20480             35        580            3
+## 245          0.50     75          20480             35        580            3
+## 249          1.00     90          30720              0        680            3
+## 250          2.00    130          30720              0        680            3
+## 251          0.50    100          30720            100        600           45
+## 377          2.00    100          20480             35        580            3
+## 378          1.00     50          20480             35        580            3
+## 379          1.00     75          20480             35        580            3
+## 380          0.50    100          30720             90        700            3
+## 381          0.50    130          30720             90        700            3
+## 382          0.50    150          30720              0        770            3
+## 383          2.00    180          30720              0        770            3
+## 384          0.50    180          30720              0        780           45
+## 385          1.00    100          30720            100        600            3
+## 386          1.00     95          30720              0        600            3
+## 480          1.00     75          20480            140        580            3
+## 481          1.00    105          20480            140        580            3
+## 482          1.00    125          20480            140        580            3
+## 483          0.50    120          30720              0        680            3
+## 484          0.25    120          30720              0        680            3
+## 485          2.00     90           2560            100        600            3
+## 486          1.00    160          30720              0        670            3
+## 487          0.50    120          30720              0        680            3
+## 488          1.00     70          30720            100        600            3
+## 490          0.50    100           2560             70        600            3
+## 491          1.00     90          30720              0        600            3
+## 492          0.50    103          30720            100        600           45
+## 493          1.00    120          30720              0        720            3
+## 494          2.00    100          30720            100        600            3
+## 638          1.00     90          20480             35        580            3
+## 639          2.00    129          20480             35        580            3
+## 640          0.50     90          20480             35        580            3
+## 641          1.00    100          30720             90        580            3
+## 642          1.00    105          30720             90        580            3
+## 643          1.00    120          30720              0        680            3
+## 644          0.50    150          30720              0        680            3
+## 645          2.00    145          30720             90        600            3
+## 646          0.50    120          30720              0        700            3
+## 647          0.50     72          20480             35        580            3
+## 648          1.00    128          30720            100        600            3
+## 649          1.00    120          30720              0        600            3
+## 716          1.00    131          30720              0        680           45
+## 717          1.00    131          30720              0        680           45
+## 718          1.00    100          30720              0        708            3
+## 719          2.00    160           6400             70        700            3
+## 720          1.00    160          30720            100        680            3
+## 721          1.00    110          30720            100        600            3
+## 785          1.00    115           3840             70        570            3
+## 786          1.00     85           3840             70        570            3
+## 787          0.50    130           3840             70        570            3
+## 788          0.50     75           3840             70        570            3
+## 789          1.00     29          30720              0        200           45
+## 790          1.00     29          30720              0        400           45
+## 791          1.00    137          30720              0        680           45
+## 792          1.00    113          30720              0        680           45
+## 793          2.00     53          30720              0        570           45
+## 794          1.00    139          30720              0        570           25
+## 795          1.00    137          30720              0        570          255
+## 796          1.00     89          30720              0        570           30
+## 797          1.00    101          30720              0        570           25
+## 798          0.50    181          30720              0        570          255
+## 799          0.50    101          30720              0        570           15
+## 800          1.00    107          30720              0        600            3
+## 801          1.00     95          30720              0        600            3
+##                                           classfication defense
+## 144                                      Freeze Pokémon     100
+## 145                                    Electric Pokémon      85
+## 146                                       Flame Pokémon      90
+## 150                                     Genetic Pokémon      70
+## 151                                 New Species Pokémon     100
+## 243                                     Thunder Pokémon      75
+## 244                                     Volcano Pokémon      85
+## 245                                      Aurora Pokémon     115
+## 249                                      Diving Pokémon     130
+## 250                                     Rainbow Pokémon      90
+## 251                                 Time Travel Pokémon     100
+## 377                                   Rock Peak Pokémon     200
+## 378                                     Iceberg Pokémon     100
+## 379                                        Iron Pokémon     150
+## 380                                         Eon Pokémon     120
+## 381                                         Eon Pokémon     100
+## 382                                   Sea Basin Pokémon      90
+## 383                                   Continent Pokémon     160
+## 384                                    Sky High Pokémon     100
+## 385                                        Wish Pokémon     100
+## 386                                         DNA Pokémon      90
+## 480                                   Knowledge Pokémon     130
+## 481                                     Emotion Pokémon     105
+## 482                                   Willpower Pokémon      70
+## 483                                    Temporal Pokémon     120
+## 484                                     Spatial Pokémon     100
+## 485                                   Lava Dome Pokémon     106
+## 486                                    Colossal Pokémon     110
+## 487                                    Renegade Pokémon     100
+## 488                                       Lunar Pokémon     120
+## 490                                   Seafaring Pokémon     100
+## 491                                 Pitch-Black Pokémon      90
+## 492                                   Gratitude Pokémon      75
+## 493                                       Alpha Pokémon     120
+## 494                                     Victory Pokémon     100
+## 638                                   Iron Will Pokémon     129
+## 639                                      Cavern Pokémon      90
+## 640                                   Grassland Pokémon      72
+## 641                                     Cyclone Pokémon      80
+## 642                                 Bolt Strike Pokémon      70
+## 643                                  Vast White Pokémon     100
+## 644                                  Deep Black Pokémon     120
+## 645                                   Abundance Pokémon      90
+## 646                                    Boundary Pokémon      90
+## 647                                        Colt Pokémon      90
+## 648                                      Melody Pokémon      90
+## 649                                   Paleozoic Pokémon      95
+## 716                                        Life Pokémon      95
+## 717                                 Destruction Pokémon      95
+## 718                                       Order Pokémon     121
+## 719                                       Jewel Pokémon     110
+## 720 Mischief Pokémon (Confined)Djinn Pokémonn (Unbound)      60
+## 721                                       Steam Pokémon     120
+## 785                                 Land Spirit Pokémon      85
+## 786                                 Land Spirit Pokémon      75
+## 787                                 Land Spirit Pokémon     115
+## 788                                 Land Spirit Pokémon     115
+## 789                                      Nebula Pokémon      31
+## 790                                   Protostar Pokémon     131
+## 791                                       Sunne Pokémon     107
+## 792                                       Moone Pokémon      89
+## 793                                    Parasite Pokémon      47
+## 794                                     Swollen Pokémon     139
+## 795                                     Lissome Pokémon      37
+## 796                                     Glowing Pokémon      71
+## 797                                      Launch Pokémon     103
+## 798                                 Drawn Sword Pokémon     131
+## 799                                   Junkivore Pokémon      53
+## 800                                       Prism Pokémon     101
+## 801                                  Artificial Pokémon     115
+##     experience_growth height_m  hp                       japanese_name
+## 144           1250000      1.7  90                   Freezerフリーザー
+## 145           1250000      1.6  90                     Thunderサンダー
+## 146           1250000      2.0  90                      Fireファイヤー
+## 150           1250000      2.0 106                    Mewtwoミュウツー
+## 151           1059860      0.4 100                           Mewミュウ
+## 243           1250000      1.9  90                      Raikouライコウ
+## 244           1250000      2.1 115                       Enteiエンテイ
+## 245           1250000      2.0 100                     Suicuneスイクン
+## 249           1250000      5.2 106                         Lugiaルギア
+## 250           1250000      3.8 106                       Hououホウオウ
+## 251           1059860      0.6 100                      Celebiセレビィ
+## 377           1250000      1.7  80                  Regirockレジロック
+## 378           1250000      1.8  80                    Regiceレジアイス
+## 379           1250000      1.9  80                 Registeelレジスチル
+## 380           1250000      1.4  80                    Latiasラティアス
+## 381           1250000      2.0  80                    Latiosラティオス
+## 382           1250000      4.5 100                    Kyogreカイオーガ
+## 383           1250000      3.5 100                   Groudonグラードン
+## 384           1250000      7.0 105                  Rayquazaレックウザ
+## 385           1250000      0.3 100                     Jirachiジラーチ
+## 386           1250000      1.7  50                    Deoxysデオキシス
+## 480           1250000      0.3  75                       Yuxieユクシー
+## 481           1250000      0.3  80                     Emritエムリット
+## 482           1250000      0.3  75                      Agnomeアグノム
+## 483           1250000      5.4 100                    Dialgaディアルガ
+## 484           1250000      4.2  90                      Palkiaパルキア
+## 485           1250000      1.7  91                   Heatranヒードラン
+## 486           1250000      3.7 110                 Regigigasレジギガス
+## 487           1250000      4.5 150  Giratina (another Forme)ギラティナ
+## 488           1250000      1.5 120                 Cresseliaクレセリア
+## 490           1250000      0.3 100                     Manaphyマナフィ
+## 491           1250000      1.5  70                   Darkraiダークライ
+## 492           1059860      0.2 100         Shaymin (sky Forme)シェイミ
+## 493           1250000      3.2 120                    Arceusアルセウス
+## 494           1250000      0.4 100                   Victiniビクティニ
+## 638           1250000      2.1  91                   Cobalonコバルオン
+## 639           1250000      1.9  91                 Terrakionテラキオン
+## 640           1250000      2.0  91                  Virizionビリジオン
+## 641           1250000      1.5  79   Tornelos (keshin Forme)トルネロス
+## 642           1250000      1.5  79   Voltolos (keshin Forme)ボルトロス
+## 643           1250000      3.2 100                    Reshiramレシラム
+## 644           1250000      2.9 100                      Zekromゼクロム
+## 645           1250000      1.5  89    Landlos (keshin Forme)ランドロス
+## 646           1250000      3.0 125                      Kyuremキュレム
+## 647           1250000      1.4  91 Keldeo (itsumo No Sugata)ケルディオ
+## 648           1250000      0.6 100     Meloetta (step Forme)メロエッタ
+## 649           1250000      1.5  71                  Genesectゲノセクト
+## 716           1250000      3.0 126                   Xerneasゼルネアス
+## 717           1250000      5.8 126                   Yveltalイベルタル
+## 718           1250000      5.0 216         Zygarde (10% Forme)ジガルデ
+## 719           1250000      0.7  50                 Diancieディアンシー
+## 720           1250000       NA  80 Hoopa (imashimerareshi Hoopa)フーパ
+## 721           1250000      1.7  80               Volcanionボルケニオン
+## 785           1250000      1.8  70             Kapu-kokekoカプ・コケコ
+## 786           1250000      1.2  70             Kapu-tetefuカプ・テテフ
+## 787           1250000      1.9  70              Kapu-bululカプ・ブルル
+## 788           1250000      1.3  70             Kapu-rehireカプ・レヒレ
+## 789           1250000      0.2  43                    Cosmogコスモッグ
+## 790           1250000      0.1  43                  Cosmovumコスモウム
+## 791           1250000      3.4 137                  Solgaleoソルガレオ
+## 792           1250000      4.0 137                    Lunalaルナアーラ
+## 793           1250000      1.2 109                   Uturoidウツロイド
+## 794           1250000      2.4 107               Massivoonマッシブーン
+## 795           1250000      1.8  71               Pheroacheフェローチェ
+## 796           1250000      3.8  83              Denjyumokuデンジュモク
+## 797           1250000      9.2  97                 Tekkaguyaテッカグヤ
+## 798           1250000      0.3  59                Kamiturugiカミツルギ
+## 799           1250000      5.5 223               Akuzikingアクジキング
+## 800           1250000      2.4  97                  Necrozmaネクロズマ
+## 801           1250000      1.0  80                    Magearnaマギアナ
+##           name percentage_male pokedex_number sp_attack sp_defense speed
+## 144   Articuno              NA            144        95        125    85
+## 145     Zapdos              NA            145       125         90   100
+## 146    Moltres              NA            146       125         85    90
+## 150     Mewtwo              NA            150       194        120   140
+## 151        Mew              NA            151       100        100   100
+## 243     Raikou              NA            243       115        100   115
+## 244      Entei              NA            244        90         75   100
+## 245    Suicune              NA            245        90        115    85
+## 249      Lugia              NA            249        90        154   110
+## 250      Ho-Oh              NA            250       110        154    90
+## 251     Celebi              NA            251       100        100   100
+## 377   Regirock              NA            377        50        100    50
+## 378     Regice              NA            378       100        200    50
+## 379  Registeel              NA            379        75        150    50
+## 380     Latias               0            380       140        150   110
+## 381     Latios             100            381       160        120   110
+## 382     Kyogre              NA            382       180        160    90
+## 383    Groudon              NA            383       150         90    90
+## 384   Rayquaza              NA            384       180        100   115
+## 385    Jirachi              NA            385       100        100   100
+## 386     Deoxys              NA            386        95         90   180
+## 480       Uxie              NA            480        75        130    95
+## 481    Mesprit              NA            481       105        105    80
+## 482      Azelf              NA            482       125         70   115
+## 483     Dialga              NA            483       150        100    90
+## 484     Palkia              NA            484       150        120   100
+## 485    Heatran              50            485       130        106    77
+## 486  Regigigas              NA            486        80        110   100
+## 487   Giratina              NA            487       120        100    90
+## 488  Cresselia               0            488        75        130    85
+## 490    Manaphy              NA            490       100        100   100
+## 491    Darkrai              NA            491       135         90   125
+## 492    Shaymin              NA            492       120         75   127
+## 493     Arceus              NA            493       120        120   120
+## 494    Victini              NA            494       100        100   100
+## 638   Cobalion              NA            638        90         72   108
+## 639  Terrakion              NA            639        72         90   108
+## 640   Virizion              NA            640        90        129   108
+## 641   Tornadus             100            641       110         90   121
+## 642  Thundurus             100            642       145         80   101
+## 643   Reshiram              NA            643       150        120    90
+## 644     Zekrom              NA            644       120        100    90
+## 645   Landorus             100            645       105         80    91
+## 646     Kyurem              NA            646       170        100    95
+## 647     Keldeo              NA            647       129         90   108
+## 648   Meloetta              NA            648        77         77   128
+## 649   Genesect              NA            649       120         95    99
+## 716    Xerneas              NA            716       131         98    99
+## 717    Yveltal              NA            717       131         98    99
+## 718    Zygarde              NA            718        91         95    85
+## 719    Diancie              NA            719       160        110   110
+## 720      Hoopa              NA            720       170        130    80
+## 721  Volcanion              NA            721       130         90    70
+## 785  Tapu Koko              NA            785        95         75   130
+## 786  Tapu Lele              NA            786       130        115    95
+## 787  Tapu Bulu              NA            787        85         95    75
+## 788  Tapu Fini              NA            788        95        130    85
+## 789     Cosmog              NA            789        29         31    37
+## 790    Cosmoem              NA            790        29        131    37
+## 791   Solgaleo              NA            791       113         89    97
+## 792     Lunala              NA            792       137        107    97
+## 793   Nihilego              NA            793       127        131   103
+## 794   Buzzwole              NA            794        53         53    79
+## 795  Pheromosa              NA            795       137         37   151
+## 796  Xurkitree              NA            796       173         71    83
+## 797 Celesteela              NA            797       107        101    61
+## 798    Kartana              NA            798        59         31   109
+## 799   Guzzlord              NA            799        97         53    43
+## 800   Necrozma              NA            800       127         89    79
+## 801   Magearna              NA            801       130        115    65
+##        type1    type2 weight_kg generation is_legendary
+## 144      ice   flying      55.4          1            1
+## 145 electric   flying      52.6          1            1
+## 146     fire   flying      60.0          1            1
+## 150  psychic              122.0          1            1
+## 151  psychic                4.0          1            1
+## 243 electric              178.0          2            1
+## 244     fire              198.0          2            1
+## 245    water              187.0          2            1
+## 249  psychic   flying     216.0          2            1
+## 250     fire   flying     199.0          2            1
+## 251  psychic    grass       5.0          2            1
+## 377     rock              230.0          3            1
+## 378      ice              175.0          3            1
+## 379    steel              205.0          3            1
+## 380   dragon  psychic      40.0          3            1
+## 381   dragon  psychic      60.0          3            1
+## 382    water              352.0          3            1
+## 383   ground              950.0          3            1
+## 384   dragon   flying     206.5          3            1
+## 385    steel  psychic       1.1          3            1
+## 386  psychic               60.8          3            1
+## 480  psychic                0.3          4            1
+## 481  psychic                0.3          4            1
+## 482  psychic                0.3          4            1
+## 483    steel   dragon     683.0          4            1
+## 484    water   dragon     336.0          4            1
+## 485     fire    steel     430.0          4            1
+## 486   normal              420.0          4            1
+## 487    ghost   dragon     750.0          4            1
+## 488  psychic               85.6          4            1
+## 490    water                1.4          4            1
+## 491     dark               50.5          4            1
+## 492    grass    grass       2.1          4            1
+## 493   normal              320.0          4            1
+## 494  psychic     fire       4.0          5            1
+## 638    steel fighting     250.0          5            1
+## 639     rock fighting     260.0          5            1
+## 640    grass fighting     200.0          5            1
+## 641   flying               63.0          5            1
+## 642 electric   flying      61.0          5            1
+## 643   dragon     fire     330.0          5            1
+## 644   dragon electric     345.0          5            1
+## 645   ground   flying      68.0          5            1
+## 646   dragon      ice     325.0          5            1
+## 647    water fighting      48.5          5            1
+## 648   normal  psychic       6.5          5            1
+## 649      bug    steel      82.5          5            1
+## 716    fairy              215.0          6            1
+## 717     dark   flying     203.0          6            1
+## 718   dragon   ground     284.6          6            1
+## 719     rock    fairy       8.8          6            1
+## 720  psychic    ghost        NA          6            1
+## 721     fire    water     195.0          6            1
+## 785 electric    fairy      20.5          7            1
+## 786  psychic    fairy      18.6          7            1
+## 787    grass    fairy      45.5          7            1
+## 788    water    fairy      21.2          7            1
+## 789  psychic                0.1          7            1
+## 790  psychic              999.9          7            1
+## 791  psychic    steel     230.0          7            1
+## 792  psychic    ghost     120.0          7            1
+## 793     rock   poison      55.5          7            1
+## 794      bug fighting     333.6          7            1
+## 795      bug fighting      25.0          7            1
+## 796 electric              100.0          7            1
+## 797    steel   flying     999.9          7            1
+## 798    grass    steel       0.1          7            1
+## 799     dark   dragon     888.0          7            1
+## 800  psychic              230.0          7            1
+## 801    steel    fairy      80.5          7            1</code></pre>
 <p><strong>Es. 26.</strong> La colonna <code>type1</code> descrive
 invece il tipo primario di un Pokémon (= indicatore per determinare a
 quali altre specie il Pokémon è più vicino dal punto di vista
 tassonomico). Seleziona solo quei Pokémon che appartengono al tipo
 primario <code>fire</code>. Quanti ce ne sono?</p>
-<p><strong>Soluzione:</strong></p>
+<p><strong>Soluzione:</strong> Interpretazione: selezionare tutte le
+colonne per ogni Pokemon che appartiene al tipo primario “fire” e
+contarne il numero</p>
+<pre class="r"><code>tipo1.fuoco &lt;- pokedex[c(which(pokedex$type1 %in% &quot;fire&quot;)),]
+length(tipo1.fuoco)</code></pre>
+<pre><code>## [1] 41</code></pre>
 
 
 
