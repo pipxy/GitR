@@ -50,10 +50,7 @@ z + 3 == 15
 ```
 
 **Soluzione:**
-
-**Non otterrò nessuna risposta** dato che il chunck è impostato per "evaluate=FALSE", cioè R calcola la condizione z+3==15
-ma non stampa il risultato.
-
+La risposta ottenuta è **TRUE** perchè 5 + 7 = 12 , dunque 12 + 3 è uguale a 15.
 
 **Es. 5.** Come posso far sì che R stampi "Venezia!" 30 volte senza doverlo continuamente scrivere io a mano? 
 
