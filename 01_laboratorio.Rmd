@@ -28,7 +28,7 @@ Svolgete i seguenti esercizi sfruttando questo file .Rmd: i commenti che eventua
 
 **Soluzione:**
 ```{r}
-sum(1,4,1,5,9,2,6)
+sum(3,1,4,1,5,9,2,6)
 ```
 
 
@@ -36,7 +36,7 @@ sum(1,4,1,5,9,2,6)
 
 **Soluzione:**
 ```{r}
-prod(1,4,1,5,9,2,6)
+prod(3,1,4,1,5,9,2,6)
 ```
 
 
@@ -102,15 +102,14 @@ wizards
 **Soluzione:**
 ```{r}
 names(wizards) <- c("Protagonista", "Amico", "Amica", "Moglie", "Professoressa", "Rivale", "Preside")
+wizards
 ```
-
 
 **Es. 11.** Un/una avido/a lettore/lettrice di Harry Potter afferma che Draco (Malfoy) non è più rivale di Harry alla fine della serie. Cambiare Rivale con Ex-Rivale.
 
 **Soluzione:**
 ```{r}
 wizards <- replace(names(wizards), which(names(wizards) %in% "Rivale"), "Ex-Rivale")
-wizards
 ```
 
 
@@ -162,7 +161,6 @@ z <- replace(z,which(z %in% 13),7)
 **Soluzione:**
 ```{r}
 punteggi <- c(18, 95, 76, 90, 84, 83, 80, 79, 63, 76, 55, 78, 90, 81, 88, 89, 92, 73, 83, 72, 85, 66, 77, 82, 99, 87)
-punteggi
 ```
 
 **Es. 18.** Calcolare la media, la mediana e il range dei punteggi.
@@ -210,7 +208,6 @@ guerra.di.troia[1:2,]
 
 **Soluzione:**
 
-Interpretazione: Se i personaggi sono ...., fornire Nome e Personalità.
 ```{r}
 guerra.di.troia[c(which(persona %in% c("Apollo", "Atena", "Afrodite"))),c(1,3)]
 ```
@@ -226,6 +223,7 @@ consultare questo file, che adesso è salvato in un data frame chiamato `pokedex
 
 **Soluzione:**
 ```{r}
+help(read.csv)
 pokedex <- read.csv(file = "pokemon.csv")
 ```
 
@@ -248,4 +246,3 @@ Interpretazione: selezionare tutte le colonne per ogni Pokemon che appartiene al
 tipo1.fuoco <- pokedex[c(which(pokedex$type1 %in% "fire")),]
 length(tipo1.fuoco)
 ```
-
