@@ -1,0 +1,148 @@
+---
+title: "Lab 2 -- Ambiente `tidyverse`"
+output: 
+  html_document:
+    theme: default
+    highlight: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br><br><br>
+
+Svolgete i seguenti esercizi sfruttando questo file .Rmd: i commenti che eventualmente vi vengono richiesti devono essere inseriti come *testo* all'interno del file, mentre i comandi R che vi permettono di svolgere manualmente le richieste vanno inseriti negli appositi *chunk*. Ricordatevi, inoltre, di caricare prima di tutto il pacchetto `tidyverse`. Inoltre, cercate di usare più possibile le potenzialità del pacchetto `kableExtra` per visualizzare le tabelle.
+
+<br>
+
+**Es. 1.** Lanciare il seguente comando: `?txhousing` e usare `glimpse` per vedere che tipo di variabili abbiamo sottomano. Riportare e commentare quello che si trova
+
+**Soluzione:**
+
+**Es. 2.** Qual è l'ultima città inserita nel data set (alla riga 8602)?
+
+**Soluzione:**
+
+**Es. 3.** Scrivere il codice per rimuovere la variabile `inventory`. Salvare i risultati in un data frame chiamato `txhousing`. Confermare, e specificare con quale comando lo si fa, che la variabile è stata rimossa.
+
+**Soluzione:**
+
+**Es. 4.** Creare una tabella, denominata `dallas_sub`, che includa solo i dati della città di Dallas nel 2012 e 2013.
+
+**Soluzione:**
+
+**Es. 5.** Aggiungere una colonna a `dallas_sub` denominata `prct_sold` che calcola la percentuale di annunci che sono stati venduti (vendite/inserzioni * 100). Assicurarsi di salvare i risultati in `dallas_sub`.
+
+**Soluzione:**
+
+**Es. 6.** Calcolare la percentuale media di annunci che sono stati venduti a Dallas in ogni mese dell'anno. Salvare i risultati del calcolo in un nuovo data frame chiamato `dallas_summary`.
+
+**Soluzione:**
+
+**Es. 7.** Ordinare in ordine decrescente i valori contenuti in `dallas_summary` in base alla percentuale media di annunci che sono stati venduti a Dallas nel 2012, in modo da poter vedere quale mese ha avuto la più alta percentuale di case vendute a Dallas in media dal 2012 al 2013. Non è necessario salvare i risultati.
+
+**Soluzione:**
+
+**Es. 8.** Eseguire il seguente blocco di codice. Studiare il codice e l'output. Spiegare con parole proprie cosa ha calcolato questo blocco di codice.
+
+```{r, eval=FALSE}
+txhousing %>% 
+  filter(year == 2012 | year == 2013, city == "Dallas") %>%
+  mutate(prct_sold = sales/listings *100) %>%
+  group_by(month) %>%
+  summarise(mean_prct_sold = mean(prct_sold)) %>% 
+  arrange(desc(mean_prct_sold))
+```
+
+**Soluzione:**
+
+**Es. 9.** A gennaio 2015, quale città aveva il minor numero di case in vendita? Colorare inoltre di rosso la riga del data frame corrispondente a tale città.
+
+**Soluzione:**
+
+**Es. 10.** Nel 2012, in quale mese sono state vendute più case in Texas? 
+
+**Soluzione:**
+
+**Es. 11.** Generare un'unica tabella che mostri il numero totale di case vendute ad Austin nel 2000 e 2001 (totale = per l'intero periodo) e il numero totale di case vendute a Dallas nel 2000 e 2001 (totale = per l'intero periodo). 
+
+**Soluzione:**
+
+**Es. 12.** Cambiamo data set: adesso ci concentreremo sui dati sulle nascite dallo stato della Nord Carolina. Copiare, incollare ed eseguire il codice sottostante per caricare i dati.
+
+```{r, eval=FALSE}
+north_carolina <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2WZwNBoQdZhMgot7urbtu8eG7tzAq-60ZJsQ_nupykCAcW0OXebVpHksPWyR4x8xJTVQ8KAulAFS/pub?gid=202410847&single=true&output=csv")
+```
+
+**Soluzione:**
+
+**Es. 13.** Che variabili ci sono? Cosa rappresentano?
+
+**Soluzione:**
+
+**Es. 14.** Esiste un'associazione positiva/negativa tra le variabili `weeks` e `weight`?
+
+**Soluzione:**
+
+**Es. 15.** Creare un grafico che mostri `weeks` lungo l'asse delle $x$ contro la variabile `gained` lungo l'asse $y$ (la quantità di peso che una madre ha guadagnato durante la gravidanza). Cambiare, se necessario, le etichette degli assi, aggiungendovi l'unità di misura e un titolo.
+
+**Soluzione:**
+
+**Es. 16.** Studiare il codice sottostante e l'output grafico risultante. *Nota:* la variabile `premie` indica se un parto è stato anticipato o è andato a termine. In particolare:
+
+A. Cosa ha comportato l'aggiunta dell'argomento `color = premie`?
+
+B. Quante variabili sono ora visualizzate su questo grafico?
+
+C. Quale sembra essere (approssimativamente) il limite di durata della gravidanza per classificare un neonato come "prematuro" rispetto a un "termine completo"?
+        
+```{r, eval=FALSE}
+ggplot(data = nc, aes(x = weeks, y = gained, color = premie))+ 
+  geom_point() + 
+  labs(x = "Pregnancy length (weeks)", y = "Maternal weight gain (lbs)")
+```
+
+**Soluzione:**
+
+**Es. 17.** Creare un nuovo dagramma scatter che mostri l'età della madre sull'asse $x$ (variabile chiamata `mage`) e il peso alla nascita dei neonati sull'asse $y$ (`weight`). Colorare i punti nel grafico in base al sesso del bambino nato (variabile chiamata `gender`). Sembra esserci una forte relazione tra l'età di una madre e il peso del suo neonato?
+
+**Soluzione:**
+
+**Es. 18.** Ispezionare l'istogramma della variabile `weeks`. In particolare, 
+
+A. L'asse $y$ è etichettato come **conteggio**. Cosa viene conteggiato nello specifico in questo caso? 
+
+B. Quale sembra essere approssimativamente la durata media delle gravidanze in settimane?
+
+C. Se cambiassimo la larghezza del bin a 100, quanti bin ci sarebbero? All'incirca quanti casi sarebbero contenuti in ogni bin?
+
+**Soluzione:**
+
+**Es. 19.** Creare un istogramma del peso alla nascita dei neonati (che è in libbre), includendo un titolo e le etichette degli assi. Se lo volessimo in chilogrammi, cosa potremmo fare?
+
+**Soluzione:**
+
+**Es. 20.** Fai un istogramma del peso alla nascita al variare del sesso del bambino usando `facet_wrap()`. Imposta il `bindwith = 0.5`. Quale genere sembra avere un peso medio alla nascita leggermente più grande? Rappresentare inoltre la stessa coppia di variabili attraverso un boxplot: che cosa notiamo in più rispetto all'istogramma?
+
+**Soluzione:**
+
+**Es. 21.** Fare un boxplot del peso guadagnato dalle mamme, diviso per lo stato di maturità delle madri (`mature`). Includi le etichette degli assi e un titolo sul grafico. L'aumento di peso medio durante la gravidanza è maggiore per le mamme più giovani o più anziane?
+
+**Soluzione:**
+
+**Es. 22.** Creare un boxplot della durata della gravidanza in settimane a seconda dell'abitudine al fumo della madre. La durata della gravidanza è più variabile per fumatori o non fumatori? (ovvero quale gruppo ha la dispersione maggiore per la variabile `weeks`?). 
+
+**Soluzione:**
+
+**Es. 23.** Valutare visivamente se la variabile per l'età del padre (`fage`) è simmetrica o meno.
+
+**Soluzione:**
+
+**Es. 24.** Valutare visivamente se il peso medio alla nascita dei bambini è maggiore per le madri bianche o non bianche (variabile chiamata `whitemom`).
+
+**Soluzione:**
+
+**Es. 25.** Valutare visivamente se, all'aumentare dell'età della madre (`mage`), la durata della gravidanza (`weeks`) sembra diminuire.
+
+**Soluzione:**
