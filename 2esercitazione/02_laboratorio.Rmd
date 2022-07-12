@@ -8,6 +8,9 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(kableExtra)
+library(dplyr)
 ```
 
 <br><br><br>
@@ -19,30 +22,88 @@ Svolgete i seguenti esercizi sfruttando questo file .Rmd: i commenti che eventua
 **Es. 1.** Lanciare il seguente comando: `?txhousing` e usare `glimpse` per vedere che tipo di variabili abbiamo sottomano. Riportare e commentare quello che si trova
 
 **Soluzione:**
+```{r, eval=FALSE}
+?txhousing       
+glimpse(txhousing)   
+```
+*Il comando "?txhousing" rimanda alla pagina dell'Help contenente le informazioni circa il dataframe. Con glimpse si visualizzano alcune informazioni sul dataframe. txhousing contiene 8602 righe e 9 diverse colonne. Ogni riga riporta:*
+
+*- Il nome della città*
+
+*- Anno della misurazione*
+
+*- Mese della misurazione (espresso in numero [1,12])*
+
+*- Il numero di vendite nel mercato immobiliare*
+
+*- Il volume di transazioni*
+
+*- La mediana mensile del prezzo di ventita degli immobili*
+
+*- Il numero di immobili in vendita*
+
+*- Un valore che rappresenta il quantitativo di tempo che servirebbe per vendere tutti gli immobili in vendita in quel mese in quella città.*
+
+*- L'indicatore "date", cioè la data in cacolata in base decimale.*
+
 
 **Es. 2.** Qual è l'ultima città inserita nel data set (alla riga 8602)?
 
 **Soluzione:**
+```{r}
+txhousing$city[8602]
+```
+
 
 **Es. 3.** Scrivere il codice per rimuovere la variabile `inventory`. Salvare i risultati in un data frame chiamato `txhousing`. Confermare, e specificare con quale comando lo si fa, che la variabile è stata rimossa.
 
 **Soluzione:**
+```{r}
+txhousing <- subset(txhousing, select = -c(which(names(txhousing) %in% "inventory")))
+```
+*Verifico ora l'esistenza di una colonna chiamata "inventory" tra le colonne del dataframe. Il comando restituisce "TRUE" ad ogni ricorrenza del termine "inventory" tra i nomi delle variabili nel dataframe. Se il risultato è di soli "FALSE" significa che non esiste la colonna "inventory" all'interno del dataframe.*
+```{r}
+print(names(txhousing) %in% "inventory")
+```
+*Il comando restituisce solo "FALSE", dunque la variabile è stata cancellata con successo dal dataframe*
 
 **Es. 4.** Creare una tabella, denominata `dallas_sub`, che includa solo i dati della città di Dallas nel 2012 e 2013.
 
 **Soluzione:**
+```{r}
+dallas_sub <- txhousing %>%
+  filter(city=="Dallas", year %in% 2012:2013)
+
+```
+
 
 **Es. 5.** Aggiungere una colonna a `dallas_sub` denominata `prct_sold` che calcola la percentuale di annunci che sono stati venduti (vendite/inserzioni * 100). Assicurarsi di salvare i risultati in `dallas_sub`.
 
 **Soluzione:**
+```{r}
+dallas_sub <- dallas_sub %>% 
+  mutate(prct_sold = (sales/listings)*100)
+```
+
 
 **Es. 6.** Calcolare la percentuale media di annunci che sono stati venduti a Dallas in ogni mese dell'anno. Salvare i risultati del calcolo in un nuovo data frame chiamato `dallas_summary`.
 
 **Soluzione:**
 
+```{r}
+dallas_summary <- dallas_sub %>%
+  transmute(prct_sold)
+```
+
+
 **Es. 7.** Ordinare in ordine decrescente i valori contenuti in `dallas_summary` in base alla percentuale media di annunci che sono stati venduti a Dallas nel 2012, in modo da poter vedere quale mese ha avuto la più alta percentuale di case vendute a Dallas in media dal 2012 al 2013. Non è necessario salvare i risultati.
 
 **Soluzione:**
+
+```{r}
+
+```
+
 
 **Es. 8.** Eseguire il seguente blocco di codice. Studiare il codice e l'output. Spiegare con parole proprie cosa ha calcolato questo blocco di codice.
 
